@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SemantiCheck | AI Forensic Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/static/script.js" defer></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <h1>SemantiCheck</h1>
+            </div>
+            <p class="subtitle">Semantic Plagiarism Analysis & AI Detection</p>
+        </header>
+
+        <main>
+            <div class="mode-selector">
+                <button id="mode-plag" class="mode-btn active">Plagiarism Check (A vs B)</button>
+                <button id="mode-ai" class="mode-btn">AI Content Detector</button>
+            </div>
+
+            <!-- Plagiarism Mode Inputs -->
+            <div id="input-plag" class="input-section">
+                <div class="text-box">
+                    <label for="text-a">Text A (Original Source)</label>
+                    <textarea id="text-a" placeholder="Enter original text here..."></textarea>
+                </div>
+                <div class="text-box">
+                    <label for="text-b">Text B (Suspect Text)</label>
+                    <textarea id="text-b" placeholder="Enter suspect text here..."></textarea>
+                </div>
+            </div>
+
+            <!-- AI Detection Mode Input -->
+            <div id="input-ai" class="input-section hidden">
+                <div class="text-box full-width">
+                    <label>Text or File to Analyze</label>
+
+                    <div id="drop-zone" class="drop-zone">
+                        <textarea id="text-ai"
+                            placeholder="Paste text here OR drag & drop a .txt/.docx file..."></textarea>
+                        <div class="file-overlay hidden" id="file-overlay">
+                            <span class="icon">📄</span>
+                            <p id="file-name">File Selected</p>
+                            <button id="remove-file" class="btn-small">Remove</button>
+                        </div>
+                        <input type="file" id="file-input" accept=".txt,.docx" class="hidden">
+                    </div>
+                    <div class="upload-hint">
+                        <small>Supported: .txt, .docx</small>
+                        <button id="trigger-upload" class="link-btn">Upload File</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="btn-local" class="btn secondary">
+                    <span class="icon">⚡</span> Quick Check (Local)
+                </button>
+                <button id="btn-detailed" class="btn primary">
+                    <span class="icon">🧠</span> Deep Analysis (AI)
+                </button>
+                <button id="btn-detect-ai" class="btn primary hidden">
+                    <span class="icon"></span> Detect AI Content
+                </button>
+            </div>
+
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Analyzing...</p>
+            </div>
+
+            <div id="results" class="hidden">
+                <!-- Plagiarism Results -->
+                <div id="res-plag" class="score-card">
+                    <div class="score-item">
+                        <span class="label">Similarity Score</span>
+                        <span class="value" id="score-val">--%</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="label">Risk Level</span>
+                        <span class="value" id="risk-val">--</span>
+                    </div>
+                </div>
+
+                <!-- AI Detection Results -->
+                <div id="res-ai" class="score-card hidden">
+                    <div class="score-item">
+                        <span class="label">AI Probability</span>
+                        <span class="value" id="ai-prob">--%</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="label">Verdict</span>
+                        <span class="value" id="ai-verdict">--</span>
+                    </div>
+                </div>
+
+                <div id="detailed-analysis-container" class="hidden">
+                    <h3>Analysis Report</h3>
+                    <div id="analysis-content" class="markdown-body"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Sentence Transformers </p>
+            <p>Fajri Abdurahman Ghurri</p>
+        </footer>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
